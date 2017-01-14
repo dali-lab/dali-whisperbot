@@ -33,24 +33,28 @@ controller.hears(['hello', 'hi', 'howdy'], ['direct_message', 'direct_mention', 
 });
 
 controller.hears(['help'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
-  bot.reply(message, 'Message me with the word \'post\' and I\'ll post anonymously in #overheards for you...');
+  bot.reply(message, 'It\'s easy, just tell me to "post" and I\'ll post anonymously in #overheards for you...');
 });
 
 controller.hears(['post'], ['direct_message'], (bot, message) => {
   bot.startConversation(message, (err, convo) => {
-    convo.ask('Sure! What do you want to post to overheards?', (response, conversation) => {
-      bot.say({
-        text: response.text,
-        channel: overheardsID,
-      });
-      convo.say('Okay, I just posted: \n' + response.text + '\nto overheards!');
-      convo.next();
+    convo.ask('Sure! What do you want to post to overheards? \n(Or, say "nevermind" if you don\'t want to post.)', (response, conversation) => {
+      if (response.includes('nevermind')) {
+        return;
+      } else {
+        bot.say({
+          text: response.text,
+          channel: overheardsID,
+        });
+        convo.say('Okay, I just posted: \n"', response.text, '""\nto overheards!');
+        convo.next();
+      }
     });
   });
 });
 
 controller.on('direct_message', (bot, message) => {
-  bot.reply(message, 'What? I didn\'t understand that...');
+  bot.reply(message, 'What? I didn\'t understand that...\nI can post in a channel anonymously for you! Just say "post" and then I\'ll ask what you want to say.');
 });
 
 
