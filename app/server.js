@@ -39,7 +39,7 @@ controller.hears(['help'], ['direct_message', 'direct_mention', 'mention'], (bot
 controller.hears(['post'], ['direct_message'], (bot, message) => {
   bot.startConversation(message, (err, convo) => {
     convo.ask('Sure! What do you want to post to overheards? \n(Or, say "nevermind" if you don\'t want to post.)', (response, conversation) => {
-      if (response.includes('nevermind')) {
+      if (response.text.includes('nevermind')) {
         convo.say('No worries, I won\'t post anything!');
         convo.next();
       } else {
