@@ -47,7 +47,7 @@ controller.hears(['post'], ['direct_message'], (bot, message) => {
           text: response.text,
           channel: overheardsID,
         });
-        convo.say('Okay, I just posted: \n"', response.text, '""\nto overheards!');
+        convo.say('Okay, I just posted: \n"' + response.text + '"\nto overheards!');
         convo.next();
       }
     });
