@@ -80,7 +80,7 @@ controller.hears(['help hours', 'office hours', 'ta hours', 'TA hours', 'homewor
 });
 
 controller.hears(['help'], ['direct_message', 'direct_mention', 'mention'], (bot, message) => {
-  bot.reply(message, 'Message me with the word \'post\' and I\'ll post anonymously in a channel for you :zipper_mouth_face:\nUse the word \'message\', and I\'ll message someone anonymously :scream:\nYou can also ask whose TA hours/office hours are in the lab today, and when! :100:');
+  bot.reply(message, 'Message me with the word \'post\' and I\'ll post anonymously in a channel for you :zipper_mouth_face:\nUse the word \'message\', and I\'ll message someone anonymously :scream:\nYou can also ask whose TA hours/office hours are in the lab today, and when! :100:\n(Side Note: If posting to some channel doesn\'t work, I probably just need to be invited to the channel first!)');
 });
 
 controller.hears(['post'], ['direct_message'], (bot, message) => {
