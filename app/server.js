@@ -1,5 +1,8 @@
+
 // example bot
 import botkit from 'botkit';
+
+require('dotenv').config(); // load environment variables
 
 // botkit controller
 const controller = botkit.slackbot({
@@ -86,10 +89,11 @@ controller.hears(['help'], ['direct_message', 'direct_mention', 'mention'], (bot
 controller.hears(['post'], ['direct_message'], (bot, message) => {
   bot.startConversation(message, (err, convo) => {
     convo.ask('Sure! Where do you want to post? (Use a # symbol!)', (response, conversation) => {
-      const channelID = response.text.substring(2, 11);
-      const channelName = response.text.substring(12, response.text.length - 1);
+      const channelID = response.text.substring(2, 13);
+      const channelName = response.text.substring(14, response.text.length - 1);
+
       convo.next();
-      convo.ask(`Okay! What do you want to post to ${channelName} ?`, (resp, conv) => {
+      convo.ask(`Okay! What do you want to post to #${channelName} ?`, (resp, conv) => {
         if (resp.subtype === 'file_share') {
           bot.say({
             text: resp.file.url_private,
